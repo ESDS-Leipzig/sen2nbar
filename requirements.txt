@@ -1,0 +1,6 @@
+dask
+numpy
+pandas
+rasterio
+xarray
+xmltodict
