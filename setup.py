@@ -29,8 +29,9 @@ setup(
         "numpy",
         "pandas",
         "rasterio",
+        "requests",
         "xarray",
-        "xmltodict"
+        "xmltodict",
     ],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
