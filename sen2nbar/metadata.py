@@ -6,7 +6,7 @@ import xarray as xr
 import xmltodict
 
 
-def _get_angle_values(values_list, angle):
+def _get_angle_values(values_list: dict, angle: str) -> np.ndarray:
     """Gets the angle values per detector in Sentinel-2 granule metadata.
 
     Parameters
@@ -27,7 +27,7 @@ def _get_angle_values(values_list, angle):
     return array
 
 
-def angles_from_metadata(metadata):
+def angles_from_metadata(metadata: str) -> xr.DataArray:
     """Gets the angle values per band (and Sun) in Sentinel-2 granule metadata.
 
     The angle values are retrieved for the Sun and View modes as a
