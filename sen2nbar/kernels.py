@@ -1,17 +1,25 @@
+from typing import Any, Union
+
 import numpy as np
 import xarray as xr
 
 
-def kgeo(sunZenith, viewZenith, relativeAzimuth, br=1.0, hb=2.0):
+def kgeo(
+    sun_zenith: Any,
+    view_zenith: Any,
+    relative_azimuth: Any,
+    br: Union[float, int] = 1.0,
+    hb: Union[float, int] = 2.0,
+) -> Any:
     """Computes the Geometric Kernel (Kgeo).
 
     Parameters
     ----------
-    sunZenith : xarray.DataArray
+    sun_zenith : Any
         Sun Zenith angles in degrees.
-    viewZenith : xarray.DataArray
+    view_zenith : Any
         Sensor Zenith angles in degrees.
-    relativeAzimuth : xarray.DataArray
+    relative_azimuth : Any
         Relative Azimuth angles in degrees.
     br : float | int, default = 1.0
         Br factor.
@@ -20,13 +28,13 @@ def kgeo(sunZenith, viewZenith, relativeAzimuth, br=1.0, hb=2.0):
 
     Returns
     -------
-    xarray.DataArray
+    Any
         Geometric Kernel (Kgeo).
     """
-    theta_i = np.deg2rad(sunZenith)
-    theta_v = np.deg2rad(viewZenith)
+    theta_i = np.deg2rad(sun_zenith)
+    theta_v = np.deg2rad(view_zenith)
 
-    phi = np.deg2rad(relativeAzimuth)
+    phi = np.deg2rad(relative_azimuth)
 
     theta_i_dev = np.arctan(br * np.tan(theta_i))
     theta_v_dev = np.arctan(br * np.tan(theta_v))
@@ -75,27 +83,27 @@ def kgeo(sunZenith, viewZenith, relativeAzimuth, br=1.0, hb=2.0):
     )
 
 
-def kvol(sunZenith, viewZenith, relativeAzimuth):
+def kvol(sun_zenith: Any, view_zenith: Any, relative_azimuth: Any) -> Any:
     """Computes the Volumetric Kernel (Kvol).
 
     Parameters
     ----------
-    sunZenith : xarray.DataArray
+    sun_zenith : Any
         Sun Zenith angles in degrees.
-    viewZenith : xarray.DataArray
+    view_zenith : Any
         Sensor Zenith angles in degrees.
-    relativeAzimuth : xarray.DataArray
+    relative_azimuth : Any
         Relative Azimuth angles in degrees.
 
     Returns
     -------
-    xarray.DataArray
+    Any
         Volumeric Kernel (Kvol).
     """
-    theta_i = np.deg2rad(sunZenith)
-    theta_v = np.deg2rad(viewZenith)
+    theta_i = np.deg2rad(sun_zenith)
+    theta_v = np.deg2rad(view_zenith)
 
-    phi = np.deg2rad(relativeAzimuth)
+    phi = np.deg2rad(relative_azimuth)
 
     cos_xi = np.cos(theta_i) * np.cos(theta_v) + np.sin(theta_i) * np.sin(
         theta_v
