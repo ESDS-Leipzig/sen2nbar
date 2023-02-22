@@ -13,6 +13,9 @@ def c_factor(
 ) -> xr.DataArray:
     """Computes the c-factor.
 
+    The mathematical formulation of the c-factor can be found in Equation 4 of Roy et al.,
+    2008 [1]_ and Equation 7 of Roy et al., 2016 [2]_.
+
     Parameters
     ----------
     sun_zenith : xarray.DataArray
@@ -26,6 +29,11 @@ def c_factor(
     -------
     xarray.DataArray
         c-factor.
+
+    References
+    ----------
+    .. [1] http://dx.doi.org/10.1016/j.rse.2008.03.009
+    .. [2] http://dx.doi.org/10.1016/j.rse.2016.01.023
     """
     return brdf(sun_zenith, view_zenith * 0, relative_azimuth) / brdf(
         sun_zenith, view_zenith, relative_azimuth
@@ -45,12 +53,19 @@ def c_factor_from_metadata(metadata: str) -> xr.DataArray:
     xarray.DataArray
         c-factor.
     """
+    # Get the available band names
     BANDS = list(fiso.keys())
 
+    # Get the Sun and View angles
     sun_view_angles = angles_from_metadata(metadata)
 
+    # Get the Sun Zenith
     theta = sun_view_angles.sel(angle="Zenith", band="Sun")
+
+    # Get the View Zenith
     vartheta = sun_view_angles.sel(angle="Zenith", band=BANDS)
+
+    # Compute the relative azimuth per band
     phi = sun_view_angles.sel(angle="Azimuth", band="Sun") - sun_view_angles.sel(
         angle="Azimuth", band=BANDS
     )
