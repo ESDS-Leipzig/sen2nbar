@@ -28,7 +28,11 @@ def _f_values_to_xarray(dict_values: dict) -> xr.DataArray:
 
 
 def brdf(sun_zenith: Any, view_zenith: Any, relative_azimuth: Any) -> Any:
-    """Computes the Bidirectional Reflectance Distribution Function (BRDF).
+    """Computes the Ross-Thick/Li-Sparse Reciprocal Bidirectional Reflectance Distribution
+    Function (BRDF) Model.
+
+    The mathematical formulation of the BRDF Model can be found in Equation 1 of Roy et 
+    al., 2008 [1]_ and Equation 1 of Roy et al., 2016 [2]_.
 
     Parameters
     ----------
@@ -43,6 +47,11 @@ def brdf(sun_zenith: Any, view_zenith: Any, relative_azimuth: Any) -> Any:
     -------
     Any
         BRDF.
+
+    References
+    ----------
+    .. [1] http://dx.doi.org/10.1016/j.rse.2008.03.009
+    .. [2] http://dx.doi.org/10.1016/j.rse.2016.01.023
     """
     fiso_ = _f_values_to_xarray(fiso)
     fvol_ = _f_values_to_xarray(fvol)
