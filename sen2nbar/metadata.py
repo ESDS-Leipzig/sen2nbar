@@ -110,3 +110,32 @@ def angles_from_metadata(metadata: str) -> xr.DataArray:
     da.attrs["epsg"] = Tile_Geocoding["HORIZONTAL_CS_CODE"]
 
     return da
+
+
+def get_processing_baseline(metadata: str) -> float:
+    """Gets the processing baseline in Sentinel-2 user metadata.
+
+    The processing baseline is retrieved as a float.
+
+    Parameters
+    ----------
+    metadata : str
+        Path to the metadata file. An URL can also be used.
+
+    Returns
+    -------
+    float
+        Processing baseline.
+    """
+    # Convert the xml into a dict
+    if os.path.exists(metadata):
+        data = xmltodict.parse(open(metadata, "r").read())
+    else:
+        data = xmltodict.parse(requests.get(metadata).content)
+
+    # Get the processing baseline
+    PROCESSING_BASELINE = data["n1:Level-2A_User_Product"]["n1:General_Info"][
+        "Product_Info"
+    ]["PROCESSING_BASELINE"]
+
+    return float(PROCESSING_BASELINE)
