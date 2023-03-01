@@ -31,7 +31,7 @@ def brdf(sun_zenith: Any, view_zenith: Any, relative_azimuth: Any) -> Any:
     """Computes the Ross-Thick/Li-Sparse Reciprocal Bidirectional Reflectance Distribution
     Function (BRDF) Model.
 
-    The mathematical formulation of the BRDF Model can be found in Equation 1 of Roy et 
+    The mathematical formulation of the BRDF Model can be found in Equation 1 of Roy et
     al., 2008 [1]_ and Equation 1 of Roy et al., 2016 [2]_.
 
     Parameters

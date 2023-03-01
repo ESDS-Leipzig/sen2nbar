@@ -30,6 +30,7 @@ setup(
         "pandas",
         "rasterio",
         "requests",
+        "scipy>=1.10.1",
         "xarray",
         "xmltodict",
     ],
