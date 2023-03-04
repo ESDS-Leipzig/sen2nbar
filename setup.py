@@ -30,6 +30,7 @@ setup(
         "pandas",
         "rasterio",
         "requests",
+        "rioxarray",
         "scipy>=1.10.1",
         "tqdm",
         "xarray",

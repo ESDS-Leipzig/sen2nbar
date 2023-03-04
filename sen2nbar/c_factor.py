@@ -1,11 +1,14 @@
 from typing import Any
 
 import numpy as np
+import pystac
+import rioxarray
 import xarray as xr
 
 from .axioms import *
 from .brdf import *
 from .metadata import *
+from .utils import _extrapolate_c_factor
 
 
 def c_factor(
@@ -71,3 +74,39 @@ def c_factor_from_metadata(metadata: str) -> xr.DataArray:
     )
 
     return c_factor(theta, vartheta, phi)
+
+
+def c_factor_from_item(item: pystac.item.Item, to_epsg: str) -> xr.DataArray:
+    """Gets the c-factor per band from a Sentinel-2 :code:`pystac.Item`.
+
+    Parameters
+    ----------
+    item : pystac.item.Item
+        Item to get the c-factor from.
+    to_epsg : str
+        EPSG code to reproject the c-factor to (e.g. "epsg:3115")
+
+    Returns
+    -------
+    xarray.DataArray
+        c-factor.
+    """
+    # Retrieve the EPSG from the item
+    SOURCE_EPSG = item.properties["proj:epsg"]
+
+    # Get the EPSG from the string
+    TO_EPSG = float(to_epsg.split(":")[-1])
+
+    # Get the granule metadata URL from the item
+    metadata = item.assets["granule-metadata"].href
+
+    # Compute the c-factor and extrapolate
+    c = c_factor_from_metadata(metadata)
+    c = _extrapolate_c_factor(c)
+
+    # If the CRSs are different: reproject
+    if SOURCE_EPSG != TO_EPSG:
+        c = c.rio.write_crs(f"epsg:{SOURCE_EPSG}")
+        c = c.rio.reproject(f"epsg:{TO_EPSG}")
+
+    return c
