@@ -129,7 +129,7 @@ def nbar_stac(
         NBAR data array.
     """
     # Keep attributes xarray
-    xr.set_options(keep_attrs=True) 
+    xr.set_options(keep_attrs=True)
 
     # Open catalogue
     CATALOG = pystac_client.Client.open(stac)
