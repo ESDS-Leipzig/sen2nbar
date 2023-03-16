@@ -29,6 +29,7 @@ setup(
         "numpy",
         "pandas",
         "planetary_computer",
+        "pystac",
         "pystac_client",
         "rasterio",
         "requests",
