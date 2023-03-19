@@ -213,3 +213,5 @@ pip install git+https://github.com/davemlz/sen2nbar
 ## License
 
 The project is licensed under the MIT license.
+
+[![RSC4Earth](https://github.com/davemlz/sen2nbar/raw/main/docs/_static/esds.png)](https://rsc4earth.de/authors/esds/)

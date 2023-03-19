@@ -215,3 +215,11 @@ License
 -------
 
 The project is licensed under the MIT license.
+
+.. raw:: html
+
+    <embed>
+        <p align="center">
+            <a href="https://rsc4earth.de/authors/esds/"><img src="https://github.com/davemlz/sen2nbar/raw/main/docs/_static/esds.png" alt="RSC4Earth"></a>
+        </p>
+    </embed>
