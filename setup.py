@@ -36,6 +36,7 @@ setup(
         "requests",
         "rioxarray>=0.13.4",
         "scipy>=1.10.1",
+        "stackstac>=0.4.3",
         "tqdm",
         "xarray>=2023.2.0",
         "xmltodict",
