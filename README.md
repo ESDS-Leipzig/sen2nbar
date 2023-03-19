@@ -77,6 +77,8 @@ Third, the super useful bibliography by Lucht et al.,:
 
 Given this, and in a few words, `sen2nbar` converts the **Sentinel-2 SR** (i.e., L2A) to **Sentinel-2 NBAR** via the **_c_-factor** method.
 
+### SAFE
+
 You can use `sen2nbar` to convert complete images via SAFE:
 
 ```python
@@ -85,6 +87,8 @@ from sen2nbar.nbar import nbar_SAFE
 # Converted images are saved inside the SAFE path
 nbar_SAFE("S2A_MSIL2A_20230223T075931_N0509_R035_T35HLC_20230223T120656.SAFE")
 ```
+
+### stackstac
 
 Or, if you are using STAC and retrieving images via `stackstac`:
 
@@ -140,6 +144,8 @@ da = nbar_stackstac(
 )
 ```
 
+### cubo
+
 And going deeper, if you are using `cubo`:
 
 ```python
@@ -165,7 +171,8 @@ da = nbar_cubo(da)
 ```
 
 > **Note**
-> NOTE THAT `sen2nbar` AUTOMATICALLY SHIFTS THE DN OF IMAGES WITH A PROCESSING BASELINE >= 04.00. THIS INCLUDES DATA CUBES OBTAINED VIA `stackstac` OR `cubo`.
+>
+> Note that `sen2nbar` automatically shifts the DN of images with a processing baseline >= 04.00. This includes data cubes obtained via `stackstac` or `cubo`.
 
 ## Bands
 
