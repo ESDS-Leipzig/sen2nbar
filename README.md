@@ -92,7 +92,7 @@ Or, if you are using STAC and retrieving images via `stackstac`:
 import pystac_client
 import stackstac
 import planetary_computer as pc
-from sen2nbar.nbar import nbar_stac
+from sen2nbar.nbar import nbar_stackstac
 
 # Important infor for later
 endpoint = "https://planetarycomputer.microsoft.com/api/stac/v1"
@@ -133,11 +133,10 @@ stack = stackstac.stack(
 )
 
 # Convert it to NBAR!
-da = nbar_stac(
+da = nbar_stackstac(
     stack,
     stac=endpoint,
-    collection=collection,
-    epsg="epsg:32606"
+    collection=collection
 )
 ```
 
