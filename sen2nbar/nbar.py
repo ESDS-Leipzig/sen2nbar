@@ -192,6 +192,40 @@ def nbar_stac(
     return da
 
 
+def nbar_stackstac(
+    da: xr.DataArray, stac: str, collection: str, quiet: bool = False
+) -> xr.DataArray:
+    """Computes the Nadir BRDF Adjusted Reflectance (NBAR) for a :code:`xarray.DataArray`
+    obtained via :code:`stackstac`.
+
+    If the processing baseline is greater than 04.00, the DN values are automatically
+    shifted before computing NBAR.
+
+    Parameters
+    ----------
+    da : xarray.DataArray
+        Data array obtained via :code:`stackstac` to use for the NBAR calculation.
+    stac : str
+        STAC Endpoint of the data array.
+    collection : str
+        Collection name of the data array.
+    quiet : bool, default = False
+        Whether to show progress.
+
+    Returns
+    -------
+    xarray.DataArray
+        NBAR data array.
+    """
+    # Get info from the stackstac data array
+    epsg = da.attrs["crs"]
+
+    # Compute NBAR
+    da = nbar_stac(da, stac, collection, epsg, quiet)
+
+    return da
+
+
 def nbar_cubo(da: xr.DataArray, quiet: bool = False) -> xr.DataArray:
     """Computes the Nadir BRDF Adjusted Reflectance (NBAR) for a :code:`xarray.DataArray`
     obtained via :code:`cubo`.
