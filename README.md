@@ -164,6 +164,7 @@ da = cubo.create(
 da = nbar_cubo(da)
 ```
 
+> **Note**
 > NOTE THAT `sen2nbar` AUTOMATICALLY SHIFTS THE DN OF IMAGES WITH A PROCESSING BASELINE >= 04.00. THIS INCLUDES DATA CUBES OBTAINED VIA `stackstac` OR `cubo`.
 
 ## Bands

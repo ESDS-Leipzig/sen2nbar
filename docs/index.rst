@@ -165,7 +165,8 @@ And going deeper, if you are using `cubo`:
    # Convert it to NBAR (This a xr.DataArray)
    da = nbar_cubo(da)
 
-> NOTE THAT `sen2nbar` AUTOMATICALLY SHIFTS THE DN OF IMAGES WITH A PROCESSING BASELINE >= 04.00. THIS INCLUDES DATA CUBES OBTAINED VIA `stackstac` OR `cubo`.
+.. attention::
+   NOTE THAT `sen2nbar` AUTOMATICALLY SHIFTS THE DN OF IMAGES WITH A PROCESSING BASELINE >= 04.00. THIS INCLUDES DATA CUBES OBTAINED VIA `stackstac` OR `cubo`.
 
 Bands
 -----
