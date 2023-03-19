@@ -51,3 +51,158 @@ sen2nbar
       <img src="https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336" alt="isort">
    </a>
    </p>
+
+
+Overview
+--------
+
+First, a super small glossary:
+
+- **BRDF**: Bidirectional Reflectance Distribution Function.
+- **DN**: Digital Number.
+- **NBAR**: Nadir BRDF Adjusted Reflectance.
+- **SR**: Surface Reflectance.
+- **STAC**: SpatioTemporal Assets Catalogs.
+
+Second, the amazing bibliography by David P. Roy et al., used to create this package:
+
+- `Multi-temporal MODIS-Landsat data fusion for relative radiometric normalization, gap filling, and prediction of Landsat data. <https://doi.org/10.1016/j.rse.2008.03.009>`_
+- `A general method to normalize Landsat reflectance data to nadir BRDF adjusted reflectance. <https://doi.org/10.1016/j.rse.2016.01.023>`_
+- `Examination of Sentinel-2A multi-spectral instrument (MSI) reflectance anisotropy and the suitability of a general method to normalize MSI reflectance to nadir BRDF adjusted reflectance. <https://doi.org/10.1016/j.rse.2017.06.019>`_
+- `Adjustment of sentinel-2 multi-spectral instrument (MSI) red-edge band reflectance to nadir BRDF adjusted reflectance (NBAR) and quantification of red-edge band BRDF effects. <https://doi.org/10.3390/rs9121325>`_
+
+Third, the super useful bibliography by Lucht et al.,:
+
+- `An algorithm for the retrieval of albedo from space using semiempirical BRDF models. <https://doi.org/10.1109/36.841980>`_
+
+Given this, and in a few words, `sen2nbar` converts the **Sentinel-2 SR** (i.e., L2A) to **Sentinel-2 NBAR** via the **_c_-factor** method.
+
+You can use `sen2nbar` to convert complete images via SAFE:
+
+.. code-block:: python
+
+   from sen2nbar.nbar import nbar_SAFE
+
+   # Converted images are saved inside the SAFE path
+   nbar_SAFE("S2A_MSIL2A_20230223T075931_N0509_R035_T35HLC_20230223T120656.SAFE")
+
+
+Or, if you are using STAC and retrieving images via `stackstac`:
+
+.. code-block:: python
+
+   import pystac_client
+   import stackstac
+   import planetary_computer as pc
+   from sen2nbar.nbar import nbar_stac
+
+   # Important infor for later
+   endpoint = "https://planetarycomputer.microsoft.com/api/stac/v1"
+   collection = "sentinel-2-l2a"
+   bounds = (-148.565368, 60.800723, -147.443389, 61.183638)
+
+   # Open the STAC
+   catalog = pystac_client.Client.open(endpoint, modifier=pc.sign_inplace)
+
+   # Define your area
+   area_of_interest = {
+      "type": "Polygon",
+      "coordinates": [
+         [
+               [bounds[0], bounds[1]],
+               [bounds[2], bounds[1]],
+               [bounds[2], bounds[3]],
+               [bounds[0], bounds[3]],
+               [bounds[0], bounds[1]],
+         ]
+      ],
+   }
+
+   # Search the items
+   items = catalog.search(
+      collections=[collection],
+      intersects=area_of_interest,
+      datetime="2019-06-01/2019-08-01",
+      query={"eo:cloud_cover": {"lt": 10}},
+   ).get_all_items()
+
+   # Retrieve all items as a xr.DataArray
+   stack = stackstac.stack(
+      items,
+      assets=["B05","B06","B07"], # Red Edge here, but you can use more!
+      bounds_latlon=bounds,
+      resolution=20
+   )
+
+   # Convert it to NBAR!
+   da = nbar_stac(
+      stack,
+      stac=endpoint,
+      collection=collection,
+      epsg="epsg:32606"
+   )
+
+And going deeper, if you are using `cubo`:
+
+.. code-block:: python
+
+   import cubo
+   import xarray as xr
+   from sen2nbar.nbar import nbar_cubo
+
+   # Get your cube
+   da = cubo.create(
+      lat=47.84815,
+      lon=13.37949,
+      collection="sentinel-2-l2a",
+      bands=["B02","B03","B04"], # RGB here, but you can add more bands!
+      start_date="2020-01-01",
+      end_date="2021-01-01",
+      edge_size=64,
+      resolution=10,
+      query={"eo:cloud_cover": {"lt": 3}}
+   )
+
+   # Convert it to NBAR (This a xr.DataArray)
+   da = nbar_cubo(da)
+
+> NOTE THAT `sen2nbar` AUTOMATICALLY SHIFTS THE DN OF IMAGES WITH A PROCESSING BASELINE >= 04.00. THIS INCLUDES DATA CUBES OBTAINED VIA `stackstac` OR `cubo`.
+
+Bands
+-----
+
+`sen2nbar` converts the following bands (if available in the input data):
+
+- **RGB Bands**: 02, 03, 04.
+- **Red Edge Bands**: 05, 06, 07.
+- **Broad NIR Band**: 08.
+- **SWIR Bands**: 11, 12.
+
+
+Installation
+------------
+
+Install the latest version from PyPI:
+
+.. code-block::
+   pip install sen2nbar
+
+Upgrade `sen2nbar` by running:
+
+.. code-block::
+   pip install -U sen2nbar
+
+Install the latest version from conda-forge:
+
+.. code-block::
+   conda install -c conda-forge sen2nbar
+
+Install the latest dev version from GitHub by running:
+
+.. code-block::
+   pip install git+https://github.com/davemlz/sen2nbar
+
+License
+-------
+
+The project is licensed under the MIT license.
