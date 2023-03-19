@@ -25,6 +25,7 @@ setup(
     packages=find_packages(exclude=("tests",)),
     package_data={"sen2nbar": ["data/*.json"]},
     install_requires=[
+        "cubo",
         "dask>=2021.9.1",
         "numpy",
         "pandas",
