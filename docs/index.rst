@@ -194,21 +194,25 @@ Installation
 Install the latest version from PyPI:
 
 .. code-block::
+
    pip install sen2nbar
 
 Upgrade `sen2nbar` by running:
 
 .. code-block::
+
    pip install -U sen2nbar
 
 Install the latest version from conda-forge:
 
 .. code-block::
+
    conda install -c conda-forge sen2nbar
 
 Install the latest dev version from GitHub by running:
 
 .. code-block::
+   
    pip install git+https://github.com/davemlz/sen2nbar
 
 License
