@@ -88,6 +88,10 @@ from sen2nbar.nbar import nbar_SAFE
 nbar_SAFE("S2A_MSIL2A_20230223T075931_N0509_R035_T35HLC_20230223T120656.SAFE")
 ```
 
+> **Note**
+>
+> Note that `sen2nbar` automatically shifts the DN of images with a processing baseline >= 04.00. This includes data cubes obtained via `stackstac` or `cubo`.
+
 ### stackstac
 
 Or, if you are using STAC and retrieving images via `stackstac`:
@@ -144,6 +148,10 @@ da = nbar_stackstac(
 )
 ```
 
+> **Warning**
+>
+> These examples are done using `Planetary Computer`. If you are using data cubes retrieved via STAC (e.g., by using `stackstac` or `cubo`), we recommend you to use this provider. The provider `Element84` is not supported at the moment.
+
 ### cubo
 
 And going deeper, if you are using `cubo`:
@@ -169,10 +177,6 @@ da = cubo.create(
 # Convert it to NBAR (This a xr.DataArray)
 da = nbar_cubo(da)
 ```
-
-> **Note**
->
-> Note that `sen2nbar` automatically shifts the DN of images with a processing baseline >= 04.00. This includes data cubes obtained via `stackstac` or `cubo`.
 
 ## Bands
 
@@ -213,3 +217,5 @@ pip install git+https://github.com/davemlz/sen2nbar
 ## License
 
 The project is licensed under the MIT license.
+
+[![RSC4Earth](https://github.com/davemlz/sen2nbar/raw/main/docs/_static/esds.png)](https://rsc4earth.de/authors/esds/)

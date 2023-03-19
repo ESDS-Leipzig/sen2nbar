@@ -89,6 +89,8 @@ You can use `sen2nbar` to convert complete images via SAFE:
    # Converted images are saved inside the SAFE path
    nbar_SAFE("S2A_MSIL2A_20230223T075931_N0509_R035_T35HLC_20230223T120656.SAFE")
 
+.. note::
+   Note that `sen2nbar` automatically shifts the DN of images with a processing baseline >= 04.00. This includes data cubes obtained via `stackstac` or `cubo`.
 
 stackstac
 ~~~~~~~~~
@@ -147,6 +149,9 @@ Or, if you are using STAC and retrieving images via `stackstac`:
       collection=collection
    )
 
+.. warning::
+   These examples are done using `Planetary Computer`. If you are using data cubes retrieved via STAC (e.g., by using `stackstac` or `cubo`), we recommend you to use this provider. The provider `Element84` is not supported at the moment.
+
 cubo
 ~~~~
 
@@ -174,9 +179,6 @@ And going deeper, if you are using `cubo`:
    # Convert it to NBAR (This a xr.DataArray)
    da = nbar_cubo(da)
 
-.. attention::
-   NOTE THAT `sen2nbar` AUTOMATICALLY SHIFTS THE DN OF IMAGES WITH A PROCESSING BASELINE >= 04.00. THIS INCLUDES DATA CUBES OBTAINED VIA `stackstac` OR `cubo`.
-
 Bands
 -----
 
@@ -194,24 +196,36 @@ Installation
 Install the latest version from PyPI:
 
 .. code-block::
+
    pip install sen2nbar
 
 Upgrade `sen2nbar` by running:
 
 .. code-block::
+
    pip install -U sen2nbar
 
 Install the latest version from conda-forge:
 
 .. code-block::
+
    conda install -c conda-forge sen2nbar
 
 Install the latest dev version from GitHub by running:
 
 .. code-block::
+   
    pip install git+https://github.com/davemlz/sen2nbar
 
 License
 -------
 
 The project is licensed under the MIT license.
+
+.. raw:: html
+
+    <embed>
+        <p align="center">
+            <a href="https://rsc4earth.de/authors/esds/"><img src="https://github.com/davemlz/sen2nbar/raw/main/docs/_static/esds.png" alt="RSC4Earth"></a>
+        </p>
+    </embed>
