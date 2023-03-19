@@ -15,6 +15,7 @@ Core module of :code:`sen2nbar`. Computes NBAR:
 
    nbar_SAFE
    nbar_stac
+   nbar_stackstac
    nbar_cubo
 
 
@@ -35,7 +36,7 @@ Extracts information from Sentinel-2 metadata:
 sen2nbar.kernels
 ----------------
 
-Compute the required kernels for BRDF:
+Computes the required kernels for BRDF:
 
 .. currentmodule:: sen2nbar.kernels
 
