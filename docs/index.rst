@@ -3,6 +3,7 @@
    :hidden:
   
    reference
+   tutorials
    changelog
 
 sen2nbar
