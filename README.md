@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/davemlz/sen2nbar"><img src="https://github.com/davemlz/sen2nbar/raw/main/docs/_static/logo.png" alt="cubo"></a>
+  <a href="https://github.com/ESDS-Leipzig/sen2nbar"><img src="https://github.com/ESDS-Leipzig/sen2nbar/raw/main/docs/_static/logo.png" alt="cubo"></a>
 </p>
 <p align="center">
     <em>Nadir BRDF Adjusted Reflectance (NBAR) for Sentinel-2 in Python</em>
@@ -14,8 +14,8 @@
 <a href='https://sen2nbar.readthedocs.io/en/latest/?badge=latest'>
     <img src='https://readthedocs.org/projects/sen2nbar/badge/?version=latest' alt='Documentation Status' />
 </a>
-<a href="https://github.com/davemlz/sen2nbar/actions/workflows/tests.yml" target="_blank">
-    <img src="https://github.com/davemlz/sen2nbar/actions/workflows/tests.yml/badge.svg" alt="Tests">
+<a href="https://github.com/ESDS-Leipzig/sen2nbar/actions/workflows/tests.yml" target="_blank">
+    <img src="https://github.com/ESDS-Leipzig/sen2nbar/actions/workflows/tests.yml/badge.svg" alt="Tests">
 </a>
 <a href="https://opensource.org/licenses/MIT" target="_blank">
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License">
@@ -42,7 +42,7 @@
 
 ---
 
-**GitHub**: [https://github.com/davemlz/sen2nbar](https://github.com/davemlz/sen2nbar)
+**GitHub**: [https://github.com/ESDS-Leipzig/sen2nbar](https://github.com/ESDS-Leipzig/sen2nbar)
 
 **Documentation**: [https://sen2nbar.readthedocs.io/](https://sen2nbar.readthedocs.io/)
 

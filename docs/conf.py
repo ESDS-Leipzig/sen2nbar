@@ -81,7 +81,7 @@ html_theme_options = {
     "color_primary": "pink",
     "color_accent": "pink",
     # Set the repo location to get a badge with stats
-    "repo_url": "https://github.com/davemlz/sen2nbar",
+    "repo_url": "https://github.com/ESDS-Leipzig/sen2nbar",
     "repo_name": "sen2nbar",
     # Visible levels of the global TOC; -1 means unlimited
     "globaltoc_depth": 2,
