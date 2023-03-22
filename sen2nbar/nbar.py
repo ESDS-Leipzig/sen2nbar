@@ -14,7 +14,7 @@ from .metadata import get_processing_baseline
 from .utils import _extrapolate_c_factor
 
 
-def nbar_SAFE(path: str, cog: bool = True, quiet: bool = False) -> None:
+def nbar_SAFE(path: str, cog: bool = True, quiet: bool = False, toint: bool = False) -> None:
     """Computes the Nadir BRDF Adjusted Reflectance (NBAR) using the SAFE path.
 
     If the processing baseline is greater than 04.00, the DN values are automatically
@@ -29,6 +29,8 @@ def nbar_SAFE(path: str, cog: bool = True, quiet: bool = False) -> None:
         Whether to save the images as Cloud Optimized GeoTIFF (COG).
     quiet : bool, default = False
         Whether to show progress.
+    toint : bool, default = False
+        Whether to convert the NBAR output to integer.
 
     Returns
     -------
@@ -91,6 +93,9 @@ def nbar_SAFE(path: str, cog: bool = True, quiet: bool = False) -> None:
 
         # Compute the NBAR
         img = img * interpolated
+
+        if toint:
+            img = img.round().astype("int16")
 
         # Save the image
         img.rio.to_raster(f"{nbar_output_path}{filename}", driver=driver)
