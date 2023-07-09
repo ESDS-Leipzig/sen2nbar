@@ -260,6 +260,7 @@ def nbar_cubo(da: xr.DataArray, quiet: bool = False) -> xr.DataArray:
     stac = da.attrs["stac"]
     collection = da.attrs["collection"]
     epsg = da.attrs["epsg"]
+    epsg = f"epsg:{epsg}"
 
     # Compute NBAR
     da = nbar_stac(da, stac, collection, epsg, quiet)
