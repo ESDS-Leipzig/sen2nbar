@@ -14,7 +14,9 @@ from .metadata import get_processing_baseline
 from .utils import _extrapolate_c_factor
 
 
-def nbar_SAFE(path: str, cog: bool = True, to_int: bool = False, quiet: bool = False) -> None:
+def nbar_SAFE(
+    path: str, cog: bool = True, to_int: bool = False, quiet: bool = False
+) -> None:
     """Computes the Nadir BRDF Adjusted Reflectance (NBAR) using the SAFE path.
 
     If the processing baseline is greater than 04.00, the DN values are automatically
@@ -43,17 +45,17 @@ def nbar_SAFE(path: str, cog: bool = True, to_int: bool = False, quiet: bool = F
         driver = None
 
     # NBAR folder to store the images
-    nbar_output_path = f"{path}/NBAR/"
+    nbar_output_path = os.path.join(path, "NBAR")
 
     # Create folder inside the SAFE path
     if not os.path.exists(nbar_output_path):
         os.makedirs(nbar_output_path)
 
     # Metadata file
-    metadata = glob(f"{path}/GRANULE/*/MTD_TL.xml")[0]
+    metadata = glob(os.path.join(path, "GRANULE", "*", "MTD_TL.xml"))[0]
 
     # Processing baseline
-    PROCESSING_BASELINE = get_processing_baseline(f"{path}/MTD_MSIL2A.xml")
+    PROCESSING_BASELINE = get_processing_baseline(os.path.join(path, "MTD_MSIL2A.xml"))
 
     # Whether to shift the DN values
     # After 04.00 all DN values are shifted by 1000
@@ -73,10 +75,14 @@ def nbar_SAFE(path: str, cog: bool = True, to_int: bool = False, quiet: bool = F
         pbar.set_description(f"Processing {band}")
 
         # Image file
-        img_path = glob(f"{path}/GRANULE/*/IMG_DATA/*/*_{band}_{resolution}m.jp2")[0]
+        img_path = glob(
+            os.path.join(
+                path, "GRANULE", "*", "IMG_DATA", "*", f"*_{band}_{resolution}m.jp2"
+            )
+        )[0]
 
         # Rename filename to tif extension
-        filename = img_path.split("/")[-1].replace("jp2", "tif")
+        filename = os.path.split(img_path)[1].replace("jp2", "tif")
 
         # Open image and convert zeros to nan
         img = rioxarray.open_rasterio(img_path)
@@ -98,7 +104,7 @@ def nbar_SAFE(path: str, cog: bool = True, to_int: bool = False, quiet: bool = F
             img = img.round().astype("int16")
 
         # Save the image
-        img.rio.to_raster(f"{nbar_output_path}{filename}", driver=driver)
+        img.rio.to_raster(os.path.join(nbar_output_path, filename), driver=driver)
 
     pbar.set_description(f"Done")
 
