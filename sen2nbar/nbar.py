@@ -68,7 +68,7 @@ def nbar_SAFE(
     c = _extrapolate_c_factor(c)
 
     # Initialize progress bar
-    pbar = tqdm(bands.items(), disable=quiet)
+    pbar = tqdm(bands.items(), disable=quiet, leave=False)
 
     # Compute NBAR per band
     for band, resolution in pbar:
@@ -165,7 +165,7 @@ def nbar_stac(
     # Compute the c-factor per item and extract the processing baseline
     c_array = []
     processing_baseline = []
-    for item in tqdm(ordered_items, disable=quiet):
+    for item in tqdm(ordered_items, disable=quiet, desc="Processing items", leave=False):
         c = c_factor_from_item(item, epsg)
         c = c.interp(
             y=da.y.values,
