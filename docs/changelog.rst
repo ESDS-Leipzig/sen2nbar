@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v2023.7.1
+---------
+
+- Catch RuntimeWarning events when doing :code:`np.nanmean` of detector angles.
+- Added description to :code:`tqdm` progress bar and set :code:`leave=False`.
+- Replaced :code:`get_all_items()` by :code:`item_collection()`.
+
 v2023.7.0
 ---------
 
