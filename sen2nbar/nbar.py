@@ -149,7 +149,7 @@ def nbar_stac(
     SEARCH = CATALOG.search(ids=da.id.values, collections=[collection])
 
     # Get the items
-    items = SEARCH.get_all_items()
+    items = SEARCH.item_collection()
 
     # Sign the items if using PC
     if stac == "https://planetarycomputer.microsoft.com/api/stac/v1":
@@ -165,7 +165,9 @@ def nbar_stac(
     # Compute the c-factor per item and extract the processing baseline
     c_array = []
     processing_baseline = []
-    for item in tqdm(ordered_items, disable=quiet, desc="Processing items", leave=False):
+    for item in tqdm(
+        ordered_items, disable=quiet, desc="Processing items", leave=False
+    ):
         c = c_factor_from_item(item, epsg)
         c = c.interp(
             y=da.y.values,
