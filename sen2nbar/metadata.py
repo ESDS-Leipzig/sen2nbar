@@ -5,6 +5,8 @@ import requests
 import xarray as xr
 import xmltodict
 
+import warnings
+
 
 def _get_angle_values(values_list: dict, angle: str) -> np.ndarray:
     """Gets the angle values per detector in Sentinel-2 granule metadata.
@@ -88,9 +90,11 @@ def angles_from_metadata(metadata: str) -> xr.DataArray:
     # Do the nanmean of the detectors angles per band
     for key, value in bands_dict.items():
         for angle in ANGLES:
-            bands_dict[key][angle] = np.nanmean(
-                np.array(bands_dict[key][angle]), axis=0
-            )
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", category=RuntimeWarning)
+                bands_dict[key][angle] = np.nanmean(
+                    np.array(bands_dict[key][angle]), axis=0
+                )
         bands_dict[key] = np.array(
             [bands_dict[key]["Zenith"], bands_dict[key]["Azimuth"]]
         )
