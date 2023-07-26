@@ -1,11 +1,10 @@
 import os
+import warnings
 
 import numpy as np
 import requests
 import xarray as xr
 import xmltodict
-
-import warnings
 
 
 def _get_angle_values(values_list: dict, angle: str) -> np.ndarray:
