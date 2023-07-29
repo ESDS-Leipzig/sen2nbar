@@ -63,6 +63,22 @@ class Test(unittest.TestCase):
         )
         self.assertIsInstance(da, xr.DataArray)
 
+    def test_cubo_not_all_angles(self):
+        """Test the nbar_cubo"""
+        da = nbar_cubo(
+            cubo.create(
+                lat=64.25611,
+                lon=19.7745,
+                collection="sentinel-2-l2a",
+                bands=["B02", "B03", "B04"],
+                start_date="2016-01-01",
+                end_date="2016-03-01",
+                edge_size=512,
+                resolution=10,
+            )
+        )
+        self.assertIsInstance(da, xr.DataArray)
+
 
 if __name__ == "__main__":
     unittest.main()
