@@ -1,4 +1,5 @@
 import os
+import warnings
 from glob import glob
 
 import numpy as np
@@ -165,18 +166,30 @@ def nbar_stac(
     # Compute the c-factor per item and extract the processing baseline
     c_array = []
     processing_baseline = []
-    for item in tqdm(
-        ordered_items, disable=quiet, desc="Processing items", leave=False
+    exclude = []  # Save indices to exclude (this for not having angles for all bands)
+    for i, item in tqdm(
+        enumerate(ordered_items), disable=quiet, desc="Processing items", leave=False
     ):
-        c = c_factor_from_item(item, epsg)
-        c = c.interp(
-            y=da.y.values,
-            x=da.x.values,
-            method="linear",
-            kwargs={"fill_value": "extrapolate"},
-        )
-        c_array.append(c)
-        processing_baseline.append(item.properties["s2:processing_baseline"])
+        try:
+            c = c_factor_from_item(item, epsg)
+            c = c.interp(
+                y=da.y.values,
+                x=da.x.values,
+                method="linear",
+                kwargs={"fill_value": "extrapolate"},
+            )
+            c_array.append(c)
+            processing_baseline.append(item.properties["s2:processing_baseline"])
+        except ValueError:
+            # Append indices to exclude, then pass
+            exclude.append(i)
+            warnings.warn(
+                f"""Item {i} with datetime {item.properties['datetime']} omitted as it doesn't have angles for all bands."""
+            )
+            pass
+
+    # Exclude all timesteps were tile angles didn't exist for all bands
+    da = da.drop_isel(time=exclude) if len(exclude) > 0 else da
 
     # Processing baseline as data array
     processing_baseline = xr.DataArray(

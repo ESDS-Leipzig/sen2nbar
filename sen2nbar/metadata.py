@@ -103,11 +103,14 @@ def angles_from_metadata(metadata: str) -> xr.DataArray:
     x = np.arange(ULX, ULX + 5000 * 23, 5000) + 2500
 
     # Create the array
-    da = xr.DataArray(
-        list(bands_dict.values()),
-        dims=["band", "angle", "y", "x"],
-        coords=dict(band=list(bands_dict.keys()), angle=ANGLES, x=x, y=y),
-    )
+    try:
+        da = xr.DataArray(
+            list(bands_dict.values()),
+            dims=["band", "angle", "y", "x"],
+            coords=dict(band=list(bands_dict.keys()), angle=ANGLES, x=x, y=y),
+        )
+    except ValueError:
+        raise ValueError("Not all bands include angles values.")
 
     # Add attributes
     da.attrs["epsg"] = Tile_Geocoding["HORIZONTAL_CS_CODE"]
