@@ -3,6 +3,7 @@ import warnings
 from glob import glob
 
 import numpy as np
+import pandas as pd
 import planetary_computer as pc
 import pystac_client
 import rioxarray
@@ -156,12 +157,13 @@ def nbar_stac(
     if stac == "https://planetarycomputer.microsoft.com/api/stac/v1":
         items = pc.sign(items)
 
-    # Order items
-    items_ids = [item.id for item in items]
-    original_order = np.array(
-        [np.where(da.id.values == item) for item in items_ids]
-    ).ravel()
-    ordered_items = np.array(items)[original_order]
+    # Order items using pandas
+    df_items = pd.DataFrame(dict(id=[item.id for item in items], item=items)).set_index(
+        "id"
+    )
+    df_da_ids = pd.DataFrame(dict(id=da.id.values)).set_index("id")
+    ordered_df = df_da_ids.join(df_items)
+    ordered_items = ordered_df.item.values
 
     # Compute the c-factor per item and extract the processing baseline
     c_array = []
@@ -189,7 +191,9 @@ def nbar_stac(
             pass
 
     # Exclude all timesteps were tile angles didn't exist for all bands
-    da = da.drop_isel(time=exclude) if len(exclude) > 0 else da
+    if len(exclude) > 0:
+        include = np.delete(np.arange(da.time.shape[0]), exclude)
+        da = da.isel(time=include)
 
     # Processing baseline as data array
     processing_baseline = xr.DataArray(
