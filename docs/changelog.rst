@@ -1,6 +1,12 @@
 Changelog
 =========
 
+v2023.7.2
+---------
+
+- Raise :code:`ValueError` events when not all bands include angle values.
+- Exclude timesteps in :code:`nbar_stac` when not all bands include angle values.
+
 v2023.7.1
 ---------
 
