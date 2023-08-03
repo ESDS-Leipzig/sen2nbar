@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v2023.8.0
+---------
+
+- Fixed concatenation error when c-factor had been reprojected.
+
 v2023.7.2
 ---------
 

@@ -14,7 +14,7 @@ def read(filename):
 
 setup(
     name="sen2nbar",
-    version="2023.7.2",
+    version="2023.8.0",
     url="https://github.com/ESDS-Leipzig/sen2nbar",
     license="MIT",
     author="David Montero Loaiza",
