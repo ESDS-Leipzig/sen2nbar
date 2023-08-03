@@ -107,6 +107,6 @@ def c_factor_from_item(item: pystac.item.Item, to_epsg: str) -> xr.DataArray:
     # If the CRSs are different: reproject
     if SOURCE_EPSG != TO_EPSG:
         c = c.rio.write_crs(f"epsg:{SOURCE_EPSG}")
-        c = c.rio.reproject(f"epsg:{TO_EPSG}")
+        c = c.rio.reproject(f"epsg:{TO_EPSG}").drop("spatial_ref")
 
     return c

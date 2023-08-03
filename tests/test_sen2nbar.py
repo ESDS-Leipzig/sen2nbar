@@ -95,6 +95,22 @@ class Test(unittest.TestCase):
         )
         self.assertIsInstance(da, xr.DataArray)
 
+    def test_stac_c_factor_reprojection(self):
+        """Test the nbar_cubo when items have different epsg"""
+        da = nbar_cubo(
+            cubo.create(
+                lat=60.64183,
+                lon=23.95952,
+                collection="sentinel-2-l2a",
+                bands=["B04","B03","B02"],
+                start_date=f"2016-01-01",
+                end_date=f"2016-03-31",
+                edge_size=512,
+                resolution=10,
+            )
+        )
+        self.assertIsInstance(da, xr.DataArray)
+
 
 if __name__ == "__main__":
     unittest.main()
