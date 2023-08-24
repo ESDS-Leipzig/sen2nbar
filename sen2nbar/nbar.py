@@ -220,8 +220,8 @@ def nbar_stac(
     da = da * c
 
     # Delete infinite values
-    inf_nan_mask = da.where(lambda x: ~np.isinf(x),other=np.nan)
-    da = da * inf_nan_mask
+    da = da.astype("float32")
+    da = da.where(lambda x: np.isfinite(x),other=np.nan)
 
     return da
 
