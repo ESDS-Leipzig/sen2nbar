@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v2023.8.1
+---------
+
+- Fixed the occurrence of infinite values.
+
 v2023.8.0
 ---------
 
