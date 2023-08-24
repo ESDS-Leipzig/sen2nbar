@@ -102,7 +102,7 @@ class Test(unittest.TestCase):
                 lat=60.64183,
                 lon=23.95952,
                 collection="sentinel-2-l2a",
-                bands=["B04","B03","B02"],
+                bands=["B04", "B03", "B02"],
                 start_date=f"2016-01-01",
                 end_date=f"2016-03-31",
                 edge_size=512,

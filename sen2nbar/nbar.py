@@ -221,7 +221,7 @@ def nbar_stac(
 
     # Delete infinite values
     da = da.astype("float32")
-    da = da.where(lambda x: np.isfinite(x),other=np.nan)
+    da = da.where(lambda x: np.isfinite(x), other=np.nan)
 
     return da
 
