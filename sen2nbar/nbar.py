@@ -219,8 +219,9 @@ def nbar_stac(
     # Compute NBAR
     da = da * c
 
-    # Delete infinite timesteps
-    da = da[np.isinf(da).sum(["band","x","y"]) == 0]
+    # Delete infinite values
+    inf_nan_mask = da.where(lambda x: ~np.isinf(x),other=np.nan)
+    da = da * inf_nan_mask
 
     return da
 
