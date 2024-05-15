@@ -59,6 +59,9 @@
 
 ---
 
+> [!IMPORTANT]  
+> Our `sen2nbar` paper is out! Check it here: **[Montero, D., Mahecha, M.D., Aybar, C., Mosig, C., & Wieneke, S. (2024). Facilitating Advanced Sentinel-2 Analysis Through a Simplified Computation of Nadir BRDF Adjusted Reflectance.](https://arxiv.org/abs/2404.15812)**
+
 ## Overview
 
 First, a super small glossary:
