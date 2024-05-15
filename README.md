@@ -14,6 +14,9 @@
 <a href='https://sen2nbar.readthedocs.io/en/latest/?badge=latest'>
     <img src='https://readthedocs.org/projects/sen2nbar/badge/?version=latest' alt='Documentation Status' />
 </a>
+<a href='https://arxiv.org/abs/2404.15812'>
+    <img src='https://img.shields.io/badge/arXiv-2404.15812-b31b1b.svg' alt='arXiv' />
+</a>
 <a href="https://github.com/ESDS-Leipzig/sen2nbar/actions/workflows/tests.yml" target="_blank">
     <img src="https://github.com/ESDS-Leipzig/sen2nbar/actions/workflows/tests.yml/badge.svg" alt="Tests">
 </a>
@@ -51,6 +54,8 @@
 **Conda-forge**: [https://anaconda.org/conda-forge/sen2nbar](https://anaconda.org/conda-forge/sen2nbar)
 
 **Tutorials**: [https://sen2nbar.readthedocs.io/en/latest/tutorials.html](https://sen2nbar.readthedocs.io/en/latest/tutorials.html)
+
+**Paper**: [https://arxiv.org/abs/2404.15812](https://arxiv.org/abs/2404.15812)
 
 ---
 
@@ -212,6 +217,23 @@ Install the latest dev version from GitHub by running:
 
 ```
 pip install git+https://github.com/davemlz/sen2nbar
+```
+
+## Citation
+
+If you use this work, please consider citing the following paper:
+
+```bibtex
+@article{montero2024sen2nbar,
+  doi = {10.48550/ARXIV.2404.15812},
+  url = {https://arxiv.org/abs/2404.15812},
+  author = {Montero,  David and Mahecha,  Miguel D. and Aybar,  César and Mosig,  Clemens and Wieneke,  Sebastian},
+  keywords = {Computer Vision and Pattern Recognition (cs.CV),  Instrumentation and Methods for Astrophysics (astro-ph.IM),  FOS: Computer and information sciences,  FOS: Computer and information sciences,  FOS: Physical sciences,  FOS: Physical sciences},
+  title = {Facilitating Advanced Sentinel-2 Analysis Through a Simplified Computation of Nadir BRDF Adjusted Reflectance},
+  publisher = {arXiv},
+  year = {2024},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
 ```
 
 ## License
