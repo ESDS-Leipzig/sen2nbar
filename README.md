@@ -55,12 +55,12 @@
 
 **Tutorials**: [https://sen2nbar.readthedocs.io/en/latest/tutorials.html](https://sen2nbar.readthedocs.io/en/latest/tutorials.html)
 
-**Paper**: [https://arxiv.org/abs/2404.15812](https://arxiv.org/abs/2404.15812)
+**Paper**: [https://doi.org/10.5194/isprs-archives-XLVIII-4-W12-2024-105-2024](https://doi.org/10.5194/isprs-archives-XLVIII-4-W12-2024-105-2024)
 
 ---
 
 > [!IMPORTANT]  
-> Our `sen2nbar` paper is out! Check it here: **[Montero, D., Mahecha, M.D., Aybar, C., Mosig, C., & Wieneke, S. (2024). Facilitating Advanced Sentinel-2 Analysis Through a Simplified Computation of Nadir BRDF Adjusted Reflectance.](https://arxiv.org/abs/2404.15812)**
+> Our `sen2nbar` paper is out! Check it here: **[Montero, D., Mahecha, M.D., Aybar, C., Mosig, C., & Wieneke, S. (2024). Facilitating Advanced Sentinel-2 Analysis Through a Simplified Computation of Nadir BRDF Adjusted Reflectance.](https://doi.org/10.5194/isprs-archives-XLVIII-4-W12-2024-105-2024)**
 
 ## Overview
 
@@ -228,14 +228,17 @@ If you use this work, please consider citing the following paper:
 
 ```bibtex
 @article{montero2024sen2nbar,
-  doi = {10.48550/ARXIV.2404.15812},
-  url = {https://arxiv.org/abs/2404.15812},
+  title = {Facilitating advanced Sentinel-2 analysis through a simplified computation of Nadir BRDF Adjusted Reflectance},
+  volume = {XLVIII-4/W12-2024},
+  ISSN = {2194-9034},
+  url = {http://dx.doi.org/10.5194/isprs-archives-XLVIII-4-W12-2024-105-2024},
+  DOI = {10.5194/isprs-archives-xlviii-4-w12-2024-105-2024},
+  journal = {The International Archives of the Photogrammetry,  Remote Sensing and Spatial Information Sciences},
+  publisher = {Copernicus GmbH},
   author = {Montero,  David and Mahecha,  Miguel D. and Aybar,  César and Mosig,  Clemens and Wieneke,  Sebastian},
-  keywords = {Computer Vision and Pattern Recognition (cs.CV),  Instrumentation and Methods for Astrophysics (astro-ph.IM),  FOS: Computer and information sciences,  FOS: Computer and information sciences,  FOS: Physical sciences,  FOS: Physical sciences},
-  title = {Facilitating Advanced Sentinel-2 Analysis Through a Simplified Computation of Nadir BRDF Adjusted Reflectance},
-  publisher = {arXiv},
   year = {2024},
-  copyright = {Creative Commons Attribution 4.0 International}
+  month = jun,
+  pages = {105–112}
 }
 ```
 
