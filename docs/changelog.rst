@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v2024.6.0
+---------
+
+- Pinned: :code:`cubo>=2024.6.0`. This avoids :code:`numpy>=2.0.0` since :code:`stackstac` breaks.
+
 v2023.8.1
 ---------
 
