@@ -25,7 +25,7 @@ setup(
     packages=find_packages(exclude=("tests",)),
     package_data={"sen2nbar": ["data/*.json"]},
     install_requires=[
-        "cubo>=2023.7.2",
+        "cubo>=2024.6.0",
         "pystac",
         "rasterio>=1.3.6",
         "requests",
